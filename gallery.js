@@ -1,8 +1,6 @@
-let contentCollection = document.getElementsByClassName('column');
-for (item of contentCollection) {
-item.addEventListener('click', function(e) {
-console.log("the source element is" + e.srcElement.id);
-
+let profileCollection = document.getElementsByClassName('column');
+for (profile of profileCollection) {
+  profile.addEventListener('click', function(e) {
   getUserProfile(e.srcElement.id);
 });
 }
@@ -13,9 +11,10 @@ containerId.style.display = "none";
 fetch('https://api.github.com/repos/angular/angular/contributors')
 .then(response => response.json())
 .then(data => {
+  
 var profileBlock = `
 <div class="modal-content">
-   <span class="close" id="closeBtn">&times;</span>
+   <span class="close" id="closeBtn" onclick="closeProfileModal()">&times;</span>
    <div class="intro">
       <div id="tab-container" class="tab-container">
          <ul class="w3-navbar w3-black">
@@ -66,6 +65,8 @@ var profileBlock = `
 `;
 
 document.getElementById("modal").innerHTML = profileBlock;
+document.getElementById("modal").style.display = "block";
+
 var tabsContainers = document.getElementsByClassName("w3-container tab");
 for (tab = 0; tab < tabsContainers.length; tab++) {
   tabsContainers[tab].style.display = "none";
@@ -84,29 +85,11 @@ function openTab(tabName) {
   document.getElementById(tabName).style.display = "block";
 }
 
-function learnMore() {
-  console.log("This hits jquery function");
-  alert("The paragraph was clicked.");
+function closeProfileModal(){
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("contain").style.display = "block";
 }
 
-/*$("a#load_home").click(function(e){ 
-  console.log("ajax funtion is hitting");
-  e.preventDefault();
-  console.log("ajax funtion is hitting");
-  alert("The paragraph was clicked.");
-});*/
-
-/*//$(document).ready(function(){
-  $("#load_home").click(function(){
-    console.log("This 
-    hits jquery function");
-   alert("The paragraph was clicked.");
-  });
-//});*/
-
-/*$(function() {
-  $("#load_home").click(function() {
-    console.log("This hits jquery function");
-    alert("The paragraph was clicked.");
-  });
-});*/
+function learnMore() {
+  alert("The lear more clicked.");
+}
